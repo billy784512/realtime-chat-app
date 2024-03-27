@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        
+        <title>Mii's Chat APP</title>
+    </head>
+    <body id="body-pd">
+        <div class="l-navbar" id="navbar">
+            <nav class="nav">
+                <div>
+                    <div class="nav__brand">
+                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                        <a href="#" class="nav__logo" id="a_name"></a>
+                    </div>
+                    <div class="nav__list">
+                        <a href="./index.html" class="nav__link active">
+                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Home</span>
+                        </a>
+
+                        <div  class="nav__link collapse">
+                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Messenger</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu" id="ul_messenger">
+                            </ul>
+                        </div>
+                        <div class="nav__link collapse">
+                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Team</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="#" class="collapse__sublink">Data</a>
+                                <a href="#" class="collapse__sublink">Group</a>
+                                <a href="#" class="collapse__sublink">Members</a>
+                            </ul>
+                        </div>
+                        <a href="#" class="nav__link">
+                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Settings</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav__link">
+                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <ul class="chat-display"></ul>
+
+            <p class="activity"></p>
+
+            <form class="form-msg">
+                <input type="text" id="message" placeholder="Your message" required />
+                <button type="btn" id="btn_Send">Send</button>
+            </form>
+        </main>
+        
+
+        <!-- SOCKET & INDEX JS-->
+        <script defer src="https://cdn.socket.io/socket.io-3.0.5.min.js"></script>
+        <script
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+            integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script defer src="assets/js/chat.js"></script>
+
+        <!-- ===== IONICONS ===== -->
+        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+        
+        <!-- ===== MAIN JS ===== -->
+        <script src="assets/js/sidebar.js"></script>
+    </body>
+</html>

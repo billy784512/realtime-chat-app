@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>Mii's Chat APP</title>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://mazipan.github.io/login-page-css/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://mazipan.github.io/login-page-css/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://mazipan.github.io/login-page-css/favicon/favicon-16x16.png">
+	<link rel="manifest" href="https://mazipan.github.io/login-page-css/manifest.json" />
+
+	<meta name="msapplication-TileColor" content="#fdcb04" />
+	<meta name="theme-color" content="#fdcb04" />
+	<link rel="manifest" href="https://mazipan.github.io/login-page-css/manifest.json">
+
+    <link rel="stylesheet" href="../shared/normalize.css">
+    <link rel="stylesheet" href="../shared/additional.css">
+    <link rel="stylesheet" href="assets/css/login_style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+    <script
+        defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+        integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
+    <script defer src="assets/js/sign.js"></script>
+    <div class="container">
+        <header>
+            <p class="paypal-logo paypal-logo-long">
+                <center><img src="../assets/logo.png" style="height: 50px;"></center>
+            </p>
+        </header>
+        <div class="textInput" id="login_emaildiv">
+            <div class="fieldWrapper">
+                <label for="username" class="fieldLabel">Email</label>
+                <input id="txt_username" name="login_email" type="email" class="hasHelp  validateEmpty " required="required"
+                    aria-required="true" value="" autocomplete="off" placeholder="Enter your username">
+            </div>
+        </div>
+        <div class="textInput" id="login_emaildiv">
+            <div class="fieldWrapper">
+                <label for="password" class="fieldLabel">Email</label>
+                <input id="txt_password" name="login_email" type="email" class="hasHelp  validateEmpty " required="required"
+                    aria-required="true" value="" autocomplete="off" placeholder="Enter your password">
+            </div>
+        </div>
+        <div class="actions actionsSpaced">
+            <button class="button actionContinue" type="submit" id="btn_sign"
+                name="btnSign" value="Login">Sign Up Now !</button>
+        </div>
+        <hr class="hr-text">
+        <a href="login.html" class="button secondary" id="createAccount">Back to Login</a>
+
+
+        <!-- ADDITIONAL CODE -- DISCLAIMER SECTION --start -->
+        <!-- <section style="max-width: 44rem; margin: 0 auto; margin-top: 1em; background: #ffde05;color: black;
+        border-radius: 0.5em; padding: .5em;">
+          <p>
+            <b>DISCLAIMER: THIS PAGE WAS MADE AS A PERSONAL EDUCATIONAL PROJECT.</b>
+            <p style="margin-top: .5em;">This is NOT the official site of the company or brand identified on the page. The creator of this page is NOT affiliated with the company or brand in any way. This page is a personal project made in connection with an educational exercise.</p>
+          </p>
+        </section> -->
+        <!-- ADDITIONAL CODE -- DISCLAIMER SECTION --end -->
+    </div>
+
+
+    <!-- ADDITIONAL CODE -- start YOU MIGHT NOT NEEDED -->
+    <footer>
+        <!-- <a href="/login-page-css/">
+            Back to Home
+        </a>
+        <span class="author">
+            Crafted with ❤️ by <a href="https://ini.space/fadil" rel="noopener noreferrer" target="_blank">Muhammad
+                Rayhan Fadillah</a>, © 2020
+        </span>
+        <a href="https://github.com/mazipan/login-page-css" rel="noopener noreferrer" target="_blank">
+            Github Repo
+        </a> -->
+    </footer>
+    <!-- ADDITIONAL CODE -- end YOU MIGHT NOT NEEDED -->
+</body>
+
+</html>
