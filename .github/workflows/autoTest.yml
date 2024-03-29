@@ -22,11 +22,10 @@ jobs:
         with: 
           node-version: '18'
 
-      - name: Change directory to backend
-        run: cd backend
-
       - name: Install dependencies
         run: yarn install
+        working-directory: backend
 
       - name: Run tests
         run: yarn test
+        working-directory: backend
