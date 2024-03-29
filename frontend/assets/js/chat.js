@@ -69,6 +69,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const user_id = urlParams.get('user_id');
 const room_id = urlParams.get('room_id');
 
+console.log(room_id);
 
 // Update Info & Append sidebar & Enter rooom
 var user_info = {};

@@ -47,6 +47,12 @@ export const createUser = async (req, res) => {
         return res.status(400).json({ message: "Username and password can not be empty!" });
     }
 
+    // Duplicated username
+    const users = await userModel.find({username: username});
+    if (users.length !== 0){
+        return res.status(400).json({message: 'Duplicated username'})
+    }
+
     try{
         const newUser = await userModel.create({
             username: username,
@@ -55,25 +61,35 @@ export const createUser = async (req, res) => {
         });
         return res.status(201).json(newUser);
     } catch(error){
+        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
 
 export const userLogin = async (req, res) => {
     const {username, password} = req.body;
-
     try{
+        // try get user
         const users = await userModel.find({username: username});
-        const user = users[0]
 
+        // no user match
+        if (users.length === 0){
+            return res.status(401).json({message: 'Not existing user'})
+        }
+
+        // wrong password
+        const user = users[0]
         if (user.password !== password.toString()){
             return res.status(401).json({message: 'Invalid username or password'});
         }
 
-        const token = sign({username: user.username}, process.env.JWT_SECRET);
+        // return token
+        var token = sign({username: user.username}, process.env.JWT_SECRET);
+        token = "jwt=" + token
         return res.status(200).json({token});
     }
     catch(error){
+        console.log(error);
         return res.status(500).json({ message: error.message});
     }
 }

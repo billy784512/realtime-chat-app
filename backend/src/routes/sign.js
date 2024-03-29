@@ -1,7 +1,6 @@
 import{
     checkUser,
     createUser,
-    getUsers,
 }from "../controllers/user.js";
 import express from "express";
 

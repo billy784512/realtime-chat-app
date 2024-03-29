@@ -1,34 +1,18 @@
-import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
-
-
-//import { Message } from "@/package/types/message";
-import signRouter from "./routes/sign.js";
-import loginRouter from "./routes/login.js"
-import userRouter from "./routes/user.js";
-import roomRouter from "./routes/room.js";
+import {app} from './app.js';
 
 dotenv.config();
 
-const app = express();
-const server = createServer(app);
-app.use(express.json());
-app.use(cors({
-  origin: "*",
-  credentials: true,
-}));
-
+export const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "*",
     credentials: true,
   },
 });
-
 
 // Socket
 //---------------------------------------------------------------------------------
@@ -76,20 +60,7 @@ io.on("connection", (socket) => {
 //---------------------------------------------------------------------------------
 
 
-//API Routes
-//---------------------------------------------------------------------------------
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.use("/api/sign/", signRouter);
-app.use("/api/login/", loginRouter);
-app.use("/api/user/", userRouter);
-app.use("/api/room/", roomRouter);
-//---------------------------------------------------------------------------------
-
-
-// Connect to MongoDB
+// Connect to MongoDB & Sever Start
 //---------------------------------------------------------------------------------
 const port = process.env.PORT || 3001;
 
@@ -98,7 +69,10 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
+  .then(async() => {
+    console.log(process.env.MONGO_URL);
+    const collections = await mongoose.connection.db.collections();
+    //console.log(collections);
     // We move app.listen() here to make sure that the server is started after the connection to the database is established.
     server.listen(port, () =>
       console.log(`Server running on port http://localhost:${port}`),
@@ -110,14 +84,5 @@ mongoose
     // Catch any errors that occurred while starting the server
     console.log(error.message);
   });
-//---------------------------------------------------------------------------------
-
-
-//Server Start
-//---------------------------------------------------------------------------------
-/* const port = process.env.PORT || 3001;
-server.listen(port, () => {
-  console.log("Server runnning on http://localhost:" + port);
-}); */
 //---------------------------------------------------------------------------------
 
