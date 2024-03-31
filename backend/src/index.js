@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
     io.to(data.room_id).emit("receive_message", {
       content: data.senderName + " is online now ", 
       senderName: data.senderName,
-      timestamp: now.getFullYear().toString() + "/" + (now.getMonth()+1).toString() + "/" + now.getDate().toString(),
+      timestamp: now.toLocaleString('sv'),
       room_id: data.room_id,
     })
   })

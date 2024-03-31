@@ -18,3 +18,6 @@ This is a side project aimed at providing users with a real-time chat experience
 - **Realtime Communication**: Socket.io is utilized for enabling real-time communication and chatroom functionality.
 - **Testing**: Unit tests are implemented using Jest to ensure the reliability of the application.
 - **Continuous Integration (CI)**: GitHub Actions is used for continuous integration, automatically running tests whenever code is pushed or a pull request is opened.
+
+### Demo
+![alt text](https://github.com/billy784512/realtime-chat-app/blob/main/demo.gif)

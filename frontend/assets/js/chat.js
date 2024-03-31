@@ -6,7 +6,7 @@ function sendMessage(data) {
   socket.emit("send_message", {
     senderName: data.senderName,
     content: data.content,
-    timestamp:  now.getFullYear().toString() + "/" + (now.getMonth()+1).toString() + "/" + now.getDate().toString(),
+    timestamp:  now.toLocaleString('sv'),
     room_id: data.room_id,
   });
 
@@ -111,7 +111,7 @@ document.querySelector("#btn_Send").addEventListener("click", () => {
     msgInput.focus();
   });
 
-msgInput.addEventListener("keypress", () => {
+msgInput.addEventListener("keydown", () => {
   socket.emit("activity", {
     senderName: user_info.username,
     room_id: room_id
@@ -123,6 +123,7 @@ msgInput.addEventListener("keypress", () => {
 socket.on("receive_message", (data) => {
   activity.textContent = "";
   const {content, senderName, timestamp, room_id} = data
+  const timeprint = timestamp.slice(5, 16);
 
   const li = document.createElement("li");
   li.className = "post";
@@ -133,7 +134,7 @@ socket.on("receive_message", (data) => {
       senderName === user_info.username ? "post__header--user" : "post__header--reply"
     }">
         <span class="post__header--name">${senderName}</span> 
-        <span class="post__header--time">${timestamp}</span> 
+        <span class="post__header--time">${timeprint}</span> 
         </div>
         <div class="post__text">${content}</div>`;
   } else {
@@ -146,9 +147,11 @@ socket.on("receive_message", (data) => {
 // Listen for activity
 let activityTimer;
 socket.on("activity", (data) => {
-  if (data.senderName == user)
+  if (data.senderName == user_info.username)
+  {
+    return
+  }
   activity.innerHTML = `${data.senderName} is typing...`;
-
   // Clear after 3 seconds
   clearTimeout(activityTimer);
   activityTimer = setTimeout(() => {
