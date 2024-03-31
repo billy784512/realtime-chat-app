@@ -21,3 +21,31 @@ This is a side project aimed at providing users with a real-time chat experience
 
 ### Demo
 ![alt text](https://github.com/billy784512/realtime-chat-app/blob/main/demo.gif)
+
+### How to start?
+
+1. install backend package
+   ```bash
+   cd /backend; yarn install
+   ```
+
+2. install frontend package
+   ```bash
+   cd /forntend; yarn install
+   ```
+
+3. setup your .env file (follow .env.example format)
+
+
+4. Run backend server
+   ```bash
+   cd /backend; yarn dev
+   ```
+
+6. Run frontend http server
+   ```bash
+   yarn /frontend; npx http-server
+   ```
+
+7. Use the servcie
+   Open browser and go to `http://localhost:8080/login`
