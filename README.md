@@ -26,12 +26,12 @@ This is a side project aimed at providing users with a real-time chat experience
 
 1. install backend package
    ```bash
-   cd /backend; yarn install
+   cd backend; yarn install
    ```
 
 2. install frontend package
    ```bash
-   cd /forntend; yarn install
+   cd ../forntend; yarn install
    ```
 
 3. setup your .env file (follow .env.example format)
@@ -39,12 +39,12 @@ This is a side project aimed at providing users with a real-time chat experience
 
 4. Run backend server
    ```bash
-   cd /backend; yarn dev
+   cd ../backend; yarn dev
    ```
 
 6. Run frontend http server
    ```bash
-   yarn /frontend; npx http-server
+   cd ../frontend; npx http-server
    ```
 
 7. Use the servcie
