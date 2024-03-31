@@ -69,8 +69,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const user_id = urlParams.get('user_id');
 const room_id = urlParams.get('room_id');
 
-console.log(room_id);
-
 // Update Info & Append sidebar & Enter rooom
 var user_info = {};
 getSelfInfo().then(result => {
@@ -84,7 +82,7 @@ getSelfInfo().then(result => {
     a.href = `./chat.html?user_id=${user_info._id}&room_id=${room.room_id}`;
     a.className = "collapse__sublink";
 
-    const namelist = room.room_id.split('#');
+    const namelist = room.room_id.split('_');
     if (namelist[0] === user_info.username){
       a.innerHTML = namelist[1];
     }
@@ -103,8 +101,6 @@ getSelfInfo().then(result => {
 }));
 
 // Add listener
-//document.querySelector(".form-msg").addEventListener("click", () => {
-
 document.querySelector("#btn_Send").addEventListener("click", () => {
   sendMessage({
     senderName: user_info.username, 
@@ -114,9 +110,14 @@ document.querySelector("#btn_Send").addEventListener("click", () => {
     msgInput.value = "";
     msgInput.focus();
   });
-/* msgInput.addEventListener("keypress", () => {
-  socket.emit("activity", nameInput.value);
-}); */
+
+msgInput.addEventListener("keypress", () => {
+  socket.emit("activity", {
+    senderName: user_info.username,
+    room_id: room_id
+  });
+});
+
 
 // Listen for messages
 socket.on("receive_message", (data) => {
@@ -142,14 +143,15 @@ socket.on("receive_message", (data) => {
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
 
-
-/* let activityTimer;
-socket.on("activity", (name) => {
-  activity.textContent = `${name} is typing...`;
+// Listen for activity
+let activityTimer;
+socket.on("activity", (data) => {
+  if (data.senderName == user)
+  activity.innerHTML = `${data.senderName} is typing...`;
 
   // Clear after 3 seconds
   clearTimeout(activityTimer);
   activityTimer = setTimeout(() => {
     activity.textContent = "";
   }, 3000);
-}); */
+});

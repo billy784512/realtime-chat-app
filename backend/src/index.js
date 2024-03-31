@@ -51,6 +51,13 @@ io.on("connection", (socket) => {
     console.log(data)
     io.to(data.room_id).emit("receive_message", data);
   });
+
+  // User typing
+  socket.on("activity", (data) => {
+    console.log(data)
+    io.to(data.room_id).emit("activity", {
+      senderName: data.senderName});
+  });
   
   // User has disconnected
   socket.on("disconnect", () => {
@@ -70,9 +77,6 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(async() => {
-    console.log(process.env.MONGO_URL);
-    const collections = await mongoose.connection.db.collections();
-    //console.log(collections);
     // We move app.listen() here to make sure that the server is started after the connection to the database is established.
     server.listen(port, () =>
       console.log(`Server running on port http://localhost:${port}`),

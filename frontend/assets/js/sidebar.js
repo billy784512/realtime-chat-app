@@ -10,6 +10,7 @@ const showMenu = (toggleId, navbarId, bodyId)=>{
 
       bodypadding.classList.toggle('body-pd')
     })
+  toggle.click();
   }
 }
 showMenu('nav-toggle','navbar','body-pd')

@@ -23,7 +23,7 @@ async function fetchUserData(usernames) {
 export const createRoom = async(req, res) => {
     const {username} = req.body;
     const usernames = [username, req.user.username].sort();
-    const room_id = usernames[0].toString() + usernames[1].toString();
+    const room_id = usernames[0].toString() + "_" + usernames[1].toString();
     try{
         // Check room existence
         const check = await roomModel.find({room_id: room_id});

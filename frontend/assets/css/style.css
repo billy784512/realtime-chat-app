@@ -58,7 +58,8 @@ button {
 }
 
 .chat-display {
-    background-color: #FFF8D7;
+    /* background-color: #FFF8D7; */
+    background-color: #ECF5FF	;
     list-style-type: none;
     width: 100%;
     max-width: 600px;
@@ -73,7 +74,7 @@ button {
 }
 
 .post {
-    background-color: #eee;
+    background-color:#fff;
     border-radius: 10px;
     padding: 0 0 .25rem;
     margin: .5rem;
@@ -101,11 +102,11 @@ button {
 }
 
 .post__header--user {
-    background-color: blue;
+   background-color: #0080FF;
 }
 
 .post__header--reply {
-    background-color: purple;
+    background-color: #ADADAD	;
 }
 
 .post__header--name {
@@ -201,7 +202,8 @@ body{
 	font-weight: lighter;
 }
 .lower-container h4{
-	color: #7F00FF;
+	/* color: #7F00FF; */
+    color:#000;
 	opacity: .6;
 	font-weight: bold;
 }
@@ -212,7 +214,7 @@ body{
 }
 .lower-container .btn{
 	padding: 12px 20px;
-	background: #7F00FF;
+	background: #84C1FF;
 	border: none;
 	color: white;
 	border-radius: 30px;
@@ -223,8 +225,8 @@ body{
 }
 .lower-container .btn:hover{
 	background: transparent;
-	color: #7F00FF;
-	border: 2px solid #7F00FF;
+	color: #84C1FF;
+	border: 2px solid #84C1FF;
 }
 .lower-container #add_friend{
     margin-top: 17%;
