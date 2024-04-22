@@ -5,36 +5,39 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const pushMessage = async (req, res) => {
-    const {id, content, sender} = req.body;
-    var now = new Date();
+export const pushMessage = async (data) => {
+    const {senderName, content, timestamp, room_id} = data;
 
     try{
-        const room = await roomModel.find({_id: id});
+        const rooms = await roomModel.find({room_id: room_id});
         const newMessage = await messageModel.create({
-            sender: sender,
+            sender: senderName,
             content: content,
-            timestamp: now
+            timestamp: timestamp
         });
+        rooms[0].messages.push(newMessage);
+        await rooms[0].save();
 
-        room.message.push(newMessage);
-        await room.save();
-
-        return res.status(201).json(room);
+        return rooms[0];
     }catch(error){
-        return res.status(500).jons({error: error.message});
+        return error.message;
     }
 };
 
 export const getAllMessage = async (req, res) => {
-    const {id} = req.params
+    const {room_id} = req.params;
 
     try{
-        const room = await roomModel.find({_id: id});
-        const messages = room.messages;
+        const room = await roomModel.findOne({room_id: room_id});
+        const msgPromise = room.messages.map(async id => {
+            const msg = await messageModel.findOne({_id: id.toHexString()});
+            return msg;
+        });
 
-        return res.status(200).json(messages);
+        const msg_list = await Promise.all(msgPromise);
+        return res.status(200).json(msg_list);
     }catch(error){
         return res.status(500).json(error);
     }
 };
+

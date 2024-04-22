@@ -1,12 +1,11 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-//import cookieSession from 'cookie-session'
-
 import signRouter from "./routes/sign.js";
 import loginRouter from "./routes/login.js"
 import userRouter from "./routes/user.js";
 import roomRouter from "./routes/room.js";
+import messageRouter from "./routes/message.js";
 
 dotenv.config();
 
@@ -23,8 +22,9 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
   });
   
-  app.use("/api/sign/", signRouter);
-  app.use("/api/login/", loginRouter);
-  app.use("/api/user/", userRouter);
-  app.use("/api/room/", roomRouter);
-  //---------------------------------------------------------------------------------
+app.use("/api/sign/", signRouter);
+app.use("/api/login/", loginRouter);
+app.use("/api/user/", userRouter);
+app.use("/api/room/", roomRouter);
+app.use("/api/message/", messageRouter);
+//---------------------------------------------------------------------------------
