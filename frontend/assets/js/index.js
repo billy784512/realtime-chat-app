@@ -26,12 +26,14 @@ async function getRoom(){
 /*=====================  MAIN FUNCTION  =====================*/ 
 
 // Axios Setting
-const jwtToken = document.cookie.split('=')[1];
+const value = `; ${document.cookie}`;
+const part = value.split(`; jwt=`);
+const jwtToken = part.pop().split(';').shift();
 
 const instance = axios.create({
   baseURL: "http://localhost:4000/api",
   headers: {
-      'Authorization': `${jwtToken}`,
+      'Authorization': `${jwtToken}`,   
   },
 });
 

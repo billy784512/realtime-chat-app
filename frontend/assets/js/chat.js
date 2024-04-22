@@ -12,6 +12,7 @@ function sendMessage(data) {
 
 }
 
+
 function enterRoom(data) {
   socket.emit("enter_room", {
     senderName: data.senderName,
@@ -38,12 +39,20 @@ async function getRoom(){
   const response = await instance.get(`/room/`);
   return response;
 }
+
+async function getMessage(room_id){
+  const response = await instance.get(`/message/${room_id}`);
+  return response;
+}
 /*===========================================================*/ 
 
 
 /*=====================  MAIN FUNCTION  =====================*/ 
 // Axios Setting
-const jwtToken = document.cookie.split('=')[1];
+const value = `; ${document.cookie}`;
+const part = value.split(`; jwt=`);
+const jwtToken = part.pop().split(';').shift();
+
 const instance = axios.create({
   baseURL: "http://localhost:4000/api",
   headers: {
@@ -98,6 +107,10 @@ getSelfInfo().then(result => {
     senderName: user_info.username,
   }
   enterRoom(enterRoomData);
+})).then(getMessage(room_id).then(result => {
+  result.data.forEach(data => {
+    appendMessage(data.content, data.sender, data.timestamp);
+  })
 }));
 
 // Add listener
@@ -123,8 +136,12 @@ msgInput.addEventListener("keydown", () => {
 socket.on("receive_message", (data) => {
   activity.textContent = "";
   const {content, senderName, timestamp, room_id} = data
-  const timeprint = timestamp.slice(5, 16);
+  appendMessage(content, senderName, timestamp);
+});
 
+
+function appendMessage(content, senderName, timestamp){
+  const timeprint = timestamp.slice(5, 16);
   const li = document.createElement("li");
   li.className = "post";
   if (senderName === user_info.username) li.className = "post post--right";
@@ -142,7 +159,7 @@ socket.on("receive_message", (data) => {
   }
   document.querySelector(".chat-display").appendChild(li);
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
-});
+}
 
 // Listen for activity
 let activityTimer;
