@@ -29,7 +29,8 @@ btn_login.addEventListener("click", async () => {
         var response = await userLogin(data);
 
         if (response.status === 200){
-            document.cookie = `${response.data.token}; max-age=604800; path=/; domain=localhost`
+            document.cookie = `${response.data.token}; max-age=604800; path=/;`;
+            setTimeout(3000);
             window.location.href = './index.html';
         }
         else{

@@ -62,7 +62,11 @@ const instance = axios.create({
 
 // Open socket
 var room = "";
-const socket = io("http://localhost:4000");
+const socket = io("http://localhost:4000", {
+  query: {
+    token: `${jwtToken}`, 
+  }
+});
 
 
 // Get DOM node 

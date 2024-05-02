@@ -2,13 +2,17 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
-import {app} from './app.js';
 
+import {app} from './app.js';
 import {pushMessage} from './controllers/message.js';
+import authJWT from './middleware/authSocket.js';
 
 dotenv.config();
 
 export const server = createServer(app);
+
+// Socket
+//---------------------------------------------------------------------------------
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -16,11 +20,10 @@ const io = new Server(server, {
   },
 });
 
-// Socket
-//---------------------------------------------------------------------------------
+io.use(authJWT);
 io.on("connection", (socket) => {
   // New user has connected
-  console.log(`${socket.id} connected`);
+  console.log(`${socket.id} connected with username: ${socket.user.username}`);
 
   // User enter room
   socket.on("enter_room", (data) => {

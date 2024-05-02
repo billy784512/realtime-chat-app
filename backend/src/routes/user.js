@@ -1,5 +1,5 @@
 import {getSelfInfo, getUsers} from "../controllers/user.js";
-import authJWT from "../middleware/auth.js";
+import authJWT from "../middleware/authAPI.js";
 import express from "express";
 
 const router = express.Router();

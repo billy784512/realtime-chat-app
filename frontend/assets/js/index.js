@@ -37,12 +37,12 @@ const instance = axios.create({
   },
 });
 
-/* instance.interceptors.request.use(function (config) {
+instance.interceptors.request.use(function (config) {
   console.log('Request:', config);
   return config;
 }, function (error) {
   return Promise.reject(error);
-}); */
+});
 
 
 // Get DOM node 
@@ -60,6 +60,7 @@ getSelfInfo().then(result => {
     a_name.innerHTML = result.data.users[0].username;
     user_info = result.data.users[0];
   }).catch(error => {
+    console.log(error);
     window.alert("Please login!!");
     window.location.href = "./login.html"
   }).then(
